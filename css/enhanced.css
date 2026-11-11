@@ -1,0 +1,746 @@
+/* ==========================================================================
+   ULTRA-OPTIMIZED MAGICAL ATMOSPHERE & HARDWARE ACCELERATION
+   ========================================================================== */
+
+:root {
+  --glow-color: rgba(255, 160, 100, 0.4);
+  --accent-sparkle: #ffe699;
+  --theme-filter: none;
+}
+
+html, body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================================================
+   ELEGANT ROMANTIC PRELOADER (1.2s SMOOTH WARMUP)
+   ========================================================================== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #020307;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+  pointer-events: auto;
+}
+
+.preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-bloom {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-flower {
+  font-size: 30px;
+  animation: preloader-pulse 1.3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 12px rgba(255, 140, 180, 0.7));
+}
+
+.preloader-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-top-color: #ff9bb2;
+  border-right-color: #39c6d6;
+  animation: preloader-spin 1.2s linear infinite;
+}
+
+@keyframes preloader-pulse {
+  0% { transform: scale(0.9); opacity: 0.65; }
+  100% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes preloader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.preloader-text {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  font-weight: 400;
+  animation: preloader-pulse 1.3s ease-in-out infinite alternate;
+}
+
+/* Background Nebula (Zero-cost pure CSS gradient without blur filters) */
+.cosmic-nebula {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #090b1c 0%, #03040b 55%, #010205 100%);
+  transform: translateZ(0);
+}
+
+.aurora-glow {
+  position: absolute;
+  width: 140vw;
+  height: 70vh;
+  top: -20vh;
+  left: -20vw;
+  background: radial-gradient(ellipse at 50% 45%, 
+    rgba(98, 42, 140, 0.22) 0%, 
+    rgba(25, 90, 160, 0.16) 40%, 
+    rgba(14, 160, 160, 0.08) 60%, 
+    transparent 80%);
+  animation: aurora-shift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.aurora-glow-secondary {
+  position: absolute;
+  width: 120vw;
+  height: 60vh;
+  bottom: 0;
+  left: -10vw;
+  background: radial-gradient(ellipse at 50% 80%, 
+    rgba(16, 75, 110, 0.18) 0%, 
+    rgba(60, 20, 95, 0.14) 40%, 
+    transparent 75%);
+  animation: aurora-shift-rev 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@keyframes aurora-shift {
+  0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.06) translateY(15px) rotate(1.5deg); opacity: 0.95; }
+  100% { transform: scale(1.02) translateY(-10px) rotate(-1deg); opacity: 0.75; }
+}
+
+@keyframes aurora-shift-rev {
+  0% { transform: scale(1) translateY(0); opacity: 0.6; }
+  50% { transform: scale(1.08) translateY(-18px); opacity: 0.85; }
+  100% { transform: scale(0.98) translateY(10px); opacity: 0.65; }
+}
+
+/* Single Unified Canvas */
+#magical-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+/* Ground Mist & Ambient Meadow Glow */
+.ground-mist {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background: linear-gradient(to top, 
+    rgba(4, 15, 25, 0.8) 0%, 
+    rgba(10, 45, 60, 0.3) 45%, 
+    transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+  transform: translateZ(0);
+}
+
+.ground-light-beam {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0);
+  width: 55vmin;
+  height: 18vmin;
+  background: radial-gradient(ellipse at bottom, 
+    rgba(40, 220, 230, 0.18) 0%, 
+    rgba(255, 170, 100, 0.1) 40%, 
+    transparent 75%);
+  pointer-events: none;
+  z-index: 6;
+  animation: pulse-ground 6s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes pulse-ground {
+  0% { opacity: 0.6; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+}
+
+/* === [3D-INTERACTION-FEATURE-START] === */
+.interactive-3d-stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  will-change: transform;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.interactive-3d-stage.grabbing {
+  cursor: grabbing;
+}
+/* === [3D-INTERACTION-FEATURE-END] === */
+
+/* Hardware Accelerated 3D Volumetric Flower Stage */
+.flowers-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.flowers {
+  position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+/* 3D Flower Slots - Volumetric Bouquet Placement */
+.flower-slot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  pointer-events: none;
+}
+
+.flower-slot--1 {
+  transform: translate3d(0, 0, 5.5vmin) rotateX(-8deg) rotateY(0deg);
+}
+
+.flower-slot--2 {
+  transform: translate3d(8.5vmin, 0, 3.5vmin) rotateY(32deg) rotateX(-6deg) rotateZ(16deg);
+}
+
+.flower-slot--3 {
+  transform: translate3d(-8.5vmin, 0, 3.5vmin) rotateY(-32deg) rotateX(-6deg) rotateZ(-16deg);
+}
+
+.flower-slot--4 {
+  transform: translate3d(0, 0, -5.5vmin) rotateY(180deg) rotateX(-8deg);
+}
+
+.flower-slot--5 {
+  transform: translate3d(8vmin, 0, -3.5vmin) rotateY(148deg) rotateX(-6deg) rotateZ(-14deg);
+}
+
+.flower-slot--6 {
+  transform: translate3d(-8vmin, 0, -3.5vmin) rotateY(-148deg) rotateX(-6deg) rotateZ(14deg);
+}
+
+.flower {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.flower__leafs {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  filter: drop-shadow(0 0 14px rgba(255, 140, 80, 0.45)) var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flower__white-circle {
+  box-shadow: 0 0 20px 6px rgba(255, 230, 80, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.flower__light {
+  box-shadow: 0 0 10px 2px rgba(255, 255, 180, 0.8), 0 0 18px 4px rgba(40, 240, 255, 0.5);
+}
+
+.flower__line {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flower__leaf {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.flower__leaf--5 {
+  transform: translate(-30%, 5%) rotateY(140deg) rotateX(40deg);
+  opacity: 0.85;
+}
+
+.flower__leaf--6 {
+  transform: translate(-70%, 5%) rotateY(-140deg) rotateX(40deg);
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   BOUQUET WRAPPER & SATIN RIBBON (3D VOLUMETRIC CONE)
+   ========================================================================== */
+.bouquet-wrapper {
+  position: absolute;
+  bottom: 3vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  opacity: 1;
+  backface-visibility: visible;
+}
+
+.bouquet-paper-back {
+  position: absolute;
+  bottom: 0;
+  width: 26vmin;
+  height: 29vmin;
+  background: linear-gradient(145deg, rgba(255, 240, 225, 0.24), rgba(215, 180, 160, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  clip-path: polygon(15% 0%, 85% 0%, 65% 100%, 35% 100%);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translate3d(0, 0, -5.5vmin) rotateX(7deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-paper-back-outer {
+  position: absolute;
+  bottom: 0;
+  width: 25vmin;
+  height: 27vmin;
+  background: linear-gradient(135deg, rgba(255, 235, 220, 0.28) 0%, rgba(220, 175, 155, 0.2) 100%);
+  border: 1.2px solid rgba(255, 255, 255, 0.35);
+  clip-path: polygon(18% 0%, 82% 0%, 68% 100%, 32% 100%);
+  transform: translate3d(0, 0, -6vmin) rotateY(180deg) rotateX(-7deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-paper-left {
+  position: absolute;
+  bottom: 0;
+  width: 14vmin;
+  height: 26vmin;
+  background: linear-gradient(115deg, rgba(255, 245, 235, 0.25), rgba(205, 165, 145, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  clip-path: polygon(0% 12%, 100% 0%, 80% 100%, 20% 100%);
+  transform: translate3d(-7vmin, 0, 0vmin) rotateY(-50deg) rotateX(4deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-paper-right {
+  position: absolute;
+  bottom: 0;
+  width: 14vmin;
+  height: 26vmin;
+  background: linear-gradient(245deg, rgba(255, 245, 235, 0.25), rgba(205, 165, 145, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  clip-path: polygon(0% 0%, 100% 12%, 80% 100%, 20% 100%);
+  transform: translate3d(7vmin, 0, 0vmin) rotateY(50deg) rotateX(4deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-paper-front {
+  position: relative;
+  width: 26vmin;
+  height: 24vmin;
+  background: linear-gradient(135deg, 
+    rgba(255, 235, 220, 0.3) 0%, 
+    rgba(240, 200, 185, 0.18) 50%, 
+    rgba(200, 160, 145, 0.25) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  clip-path: polygon(0% 10%, 100% 0%, 72% 100%, 28% 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transform: translate3d(0, 0, 5.5vmin) rotateX(-6deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-paper-overlay {
+  position: absolute;
+  top: 10%;
+  width: 22vmin;
+  height: 18vmin;
+  background: linear-gradient(225deg, 
+    rgba(255, 255, 255, 0.35) 0%, 
+    rgba(255, 215, 205, 0.12) 60%, 
+    transparent 100%);
+  clip-path: polygon(8% 0%, 95% 15%, 68% 100%, 32% 100%);
+  transform: translate3d(0, 0, 6.2vmin) rotateY(-8deg) rotateX(-4deg);
+  transform-origin: bottom center;
+  filter: var(--theme-filter);
+  transition: filter 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouquet-ribbon--front {
+  position: absolute;
+  bottom: 6vmin;
+  transform: translate3d(0, 0, 7.5vmin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bouquet-ribbon--back {
+  position: absolute;
+  bottom: 6vmin;
+  transform: translate3d(0, 0, -7.5vmin) rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ribbon-center {
+  width: 3.2vmin;
+  height: 3.2vmin;
+  background: radial-gradient(circle at 35% 35%, #ff8fab, #e63960);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 75, 120, 0.7);
+  z-index: 6;
+}
+
+.ribbon-loop-left, .ribbon-loop-right {
+  position: absolute;
+  top: -1.2vmin;
+  width: 5.5vmin;
+  height: 4vmin;
+  background: linear-gradient(135deg, #ff758f, #d90429);
+  border-radius: 50% 50% 20% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.ribbon-loop-left {
+  left: -4.8vmin;
+  transform: rotate(-25deg);
+}
+
+.ribbon-loop-right {
+  right: -4.8vmin;
+  transform: scaleX(-1) rotate(-25deg);
+}
+
+.ribbon-tail-left, .ribbon-tail-right {
+  position: absolute;
+  top: 1.8vmin;
+  width: 2.2vmin;
+  height: 7vmin;
+  background: linear-gradient(to bottom, #d90429, #ff758f);
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0 85%);
+}
+
+.ribbon-tail-left {
+  left: -2vmin;
+  transform: rotate(18deg);
+}
+
+.ribbon-tail-right {
+  right: -2vmin;
+  transform: scaleX(-1) rotate(18deg);
+}
+
+/* ==========================================================================
+   MINIMALIST SOUND CONTROL (AUTO-PLAYING)
+   ========================================================================== */
+.sound-control-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(15, 20, 35, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  opacity: 0.55;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  transform: translateZ(0);
+}
+
+.sound-control-btn:hover {
+  opacity: 1;
+  background: rgba(15, 20, 35, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05) translateZ(0);
+}
+
+.sound-waves {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.sound-waves span {
+  width: 2px;
+  background-color: #ff9bb2;
+  border-radius: 2px;
+  height: 3px;
+  transition: height 0.2s ease;
+}
+
+.sound-control-btn.playing .sound-waves span:nth-child(1) {
+  animation: wave 1s ease-in-out infinite;
+}
+.sound-control-btn.playing .sound-waves span:nth-child(2) {
+  animation: wave 1s ease-in-out 0.2s infinite;
+}
+.sound-control-btn.playing .sound-waves span:nth-child(3) {
+  animation: wave 1s ease-in-out 0.4s infinite;
+}
+
+@keyframes wave {
+  0%, 100% { height: 3px; }
+  50% { height: 12px; }
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE PERFECTION
+   ========================================================================== */
+@media (max-width: 600px) {
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Optimal flower & bouquet scale for phone portrait screens */
+  .flowers {
+    transform: scale(1.12) translateY(-2vmin) translateZ(0);
+  }
+
+  .sound-control-btn {
+    top: 14px;
+    right: 14px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Harmonious bouquet wrap dimensions on mobile */
+  .bouquet-paper-back {
+    width: 25vmin;
+    height: 29vmin;
+  }
+
+  .bouquet-paper-front {
+    width: 27vmin;
+    height: 25vmin;
+  }
+
+  .bouquet-ribbon--front,
+  .bouquet-ribbon--back {
+    bottom: 5.5vmin;
+  }
+}
+
+/* Horizontal / Landscape phone orientation protection */
+@media (max-height: 500px) {
+  .flowers {
+    transform: scale(0.68) translateY(4vmin) translateZ(0);
+  }
+
+  .meadow-island {
+    transform: translateX(-50%) scale(0.75);
+  }
+}
+
+
+/* ==========================================================================
+   CIRCULAR 3D MEADOW GARDEN (TAMAN RUMPUT RADIAL MENGELILINGI BUNGA)
+   ========================================================================== */
+.meadow-ground-disc {
+  position: absolute;
+  bottom: -0.5vmin;
+  left: 50%;
+  width: 68vmin;
+  height: 68vmin;
+  transform: translateX(-50%) rotateX(90deg);
+  border-radius: 50%;
+  background: radial-gradient(circle at center, 
+    rgba(22, 90, 50, 0.45) 0%, 
+    rgba(14, 58, 38, 0.28) 45%, 
+    rgba(8, 30, 22, 0.12) 70%, 
+    transparent 85%);
+  pointer-events: none;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.meadow-island {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  pointer-events: none;
+  z-index: 22;
+}
+
+.mini-grass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform;
+}
+
+.mini-grass.grow-ans {
+  animation: grow-mini-grass 1.8s var(--d, 1s) backwards ease-out;
+}
+
+@keyframes grow-mini-grass {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--x, 0vmin), 0, var(--z, 0vmin)) scale(0) rotate(var(--r, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(var(--x, 0vmin), 0, var(--z, 0vmin)) scale(var(--s, 0.42)) rotate(var(--r, 0deg));
+  }
+}
+
+/* Ultra-lightweight vector leaf (Zero mask-image, Zero filter overhead = 60-120 FPS on all devices) */
+.mini-grass .leaf {
+  --w: 4vmin;
+  --h: 13.5vmin;
+  --c: #1aaa15;
+  position: absolute;
+  bottom: 0;
+  width: var(--w);
+  height: var(--h);
+  border-top-left-radius: 100%;
+  border-left: 1.25vmin solid var(--c);
+  background: transparent;
+  opacity: 0.9;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+/* 4-Blade 3D Radial Fanning (Mekar Radial 360° Mengelilingi Bunga) */
+.mini-grass .leaf--0 {
+  left: 0.8vmin;
+  animation: leaf-3d-0 3.6s ease-in-out infinite;
+}
+
+.mini-grass .leaf--1 {
+  --w: 2.8vmin;
+  --h: 16vmin;
+  left: 0;
+  animation: leaf-3d-1 4.2s ease-in-out infinite 0.2s;
+}
+
+.mini-grass .leaf--2 {
+  --w: 3.5vmin;
+  --h: 12vmin;
+  left: -0.4vmin;
+  bottom: 0.5vmin;
+  animation: leaf-3d-2 3.4s ease-in-out infinite 0.4s;
+}
+
+.mini-grass .leaf--3 {
+  --w: 2.5vmin;
+  --h: 10vmin;
+  left: -0.8vmin;
+  bottom: 0.4vmin;
+  animation: leaf-3d-3 3.0s ease-in-out infinite 0.1s;
+}
+
+@keyframes leaf-3d-0 {
+  0%, 100% { transform: rotateY(0deg) rotateX(8deg) rotateZ(-2deg); }
+  50% { transform: rotateY(0deg) rotateX(14deg) rotateZ(3deg); }
+}
+
+@keyframes leaf-3d-1 {
+  0%, 100% { transform: rotateY(65deg) rotateX(10deg) rotateZ(-2deg); }
+  50% { transform: rotateY(65deg) rotateX(16deg) rotateZ(3deg); }
+}
+
+@keyframes leaf-3d-2 {
+  0%, 100% { transform: rotateY(-65deg) rotateX(8deg) rotateZ(2deg); }
+  50% { transform: rotateY(-65deg) rotateX(14deg) rotateZ(-3deg); }
+}
+
+@keyframes leaf-3d-3 {
+  0%, 100% { transform: rotateY(180deg) rotateX(8deg) rotateZ(-2deg); }
+  50% { transform: rotateY(180deg) rotateX(13deg) rotateZ(3deg); }
+}
+
+/* Subtle Natural Color Variations for Grass */
+.mini-grass--teal .leaf { --c: #159faa; }
+.mini-grass--emerald .leaf { --c: #19b35a; }
+.mini-grass--moss .leaf { --c: #0d8b70; }
+.mini-grass--cyan .leaf { --c: #17c3b2; }
+
+/* Volumetric 3D spatial positioning for tall foliage & side grass */
+.long-g--0 { transform: translate3d(-42vmin, 0, 3vmin) !important; transform-style: preserve-3d; }
+.long-g--1 { transform: translate3d(-35vmin, 0, -5vmin) scale(0.8) rotate(-5deg) !important; transform-style: preserve-3d; }
+.long-g--2 { transform: translate3d(-35vmin, 0, 6vmin) scale(0.6) rotateX(45deg) !important; transform-style: preserve-3d; }
+.long-g--3 { transform: translate3d(-17vmin, 0, -4vmin) scale(0.6) rotateX(45deg) !important; transform-style: preserve-3d; }
+.long-g--4 { transform: translate3d(25vmin, 0, 4vmin) scale(0.6) rotateX(45deg) !important; transform-style: preserve-3d; }
+.long-g--5 { transform: translate3d(42vmin, 0, -6vmin) scale(0.8) rotate(2deg) !important; transform-style: preserve-3d; }
+.long-g--6 { transform: translate3d(0vmin, 0, 8vmin) scale(0.8) rotate(2deg) !important; transform-style: preserve-3d; }
+.long-g--7 { transform: translate3d(35vmin, 0, -7vmin) scale(0.6) rotate(2deg) !important; transform-style: preserve-3d; }
+.long-g, .flower__g-front, .flower__g-fr, .flower__g-right, .growing-grass {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+.flower__grass--1 { transform: translate3d(0, 0, 4vmin) rotateY(-15deg); transform-style: preserve-3d; }
+.flower__grass--2 { transform: translate3d(2vmin, 0, -4vmin) rotateY(20deg); transform-style: preserve-3d; }
+.flower__g-front { transform: translate3d(0, 0, 5.5vmin) rotateX(-4deg); transform-style: preserve-3d; }

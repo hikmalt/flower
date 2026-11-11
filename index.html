@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/flowers.png" type="image/x-icon">
+    <title>flowers</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhanced.css">
+</head>
+<body class="container">
+  <!-- Elegant Romantic Warmup Preloader (Smooth 1.1s) -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-bloom">
+      <span class="preloader-flower">🌸</span>
+      <div class="preloader-ring"></div>
+    </div>
+    <p class="preloader-text">Menyiapkan keindahan bunga...</p>
+  </div>
+
+  <!-- Deep Cosmic Nebula & Aurora Glow -->
+  <div class="cosmic-nebula">
+    <div class="aurora-glow"></div>
+    <div class="aurora-glow-secondary"></div>
+  </div>
+
+  <!-- Single High-Performance Canvas (Stars, Meteors, Fireflies, Petals) -->
+  <canvas id="magical-canvas"></canvas>
+
+  <!-- Ground Mist & Soft Meadow Lighting -->
+  <div class="ground-mist">
+    <div class="ground-light-beam"></div>
+  </div>
+
+  <!-- Original Night Overlay (Optimized without blend-mode overhead) -->
+  <div class="night" style="opacity: 0.25;"></div>
+
+  <!-- Minimalist Sound Toggle (Musik Otomatis Berjalan) -->
+  <button class="sound-control-btn playing" id="soundToggleBtn" title="Mute / Unmute Musik" aria-label="Audio Control">
+    <span class="sound-icon">🎵</span>
+    <div class="sound-waves"><span></span><span></span><span></span></div>
+  </button>
+
+  <!-- === [3D-INTERACTION-FEATURE-START] === -->
+  <div class="interactive-3d-stage" id="stage3D">
+  <!-- === [3D-INTERACTION-FEATURE-END] === -->
+  <!-- Flowers Stage -->
+  <div class="flowers-wrapper">
+    <div class="flowers">
+      <!-- Slot 1: Bunga Utama Depan Tengah -->
+      <div class="flower-slot flower-slot--1">
+        <div class="flower flower--1">
+          <div class="flower__leafs flower__leafs--1">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+            <div class="flower__line__leaf flower__line__leaf--5"></div>
+            <div class="flower__line__leaf flower__line__leaf--6"></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Slot 2: Bunga Depan Kanan -->
+      <div class="flower-slot flower-slot--2">
+        <div class="flower flower--2">
+          <div class="flower__leafs flower__leafs--2">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Slot 3: Bunga Depan Kiri -->
+      <div class="flower-slot flower-slot--3">
+        <div class="flower flower--3">
+          <div class="flower__leafs flower__leafs--3">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slot 4: Bunga Belakang Tengah (Tampak Mekar Mewah saat diputar 180°) -->
+      <div class="flower-slot flower-slot--4">
+        <div class="flower flower--1">
+          <div class="flower__leafs flower__leafs--1">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+            <div class="flower__line__leaf flower__line__leaf--5"></div>
+            <div class="flower__line__leaf flower__line__leaf--6"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slot 5: Bunga Belakang Kanan -->
+      <div class="flower-slot flower-slot--5">
+        <div class="flower flower--2">
+          <div class="flower__leafs flower__leafs--2">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slot 6: Bunga Belakang Kiri -->
+      <div class="flower-slot flower-slot--6">
+        <div class="flower flower--3">
+          <div class="flower__leafs flower__leafs--3">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+    
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:1.2s">
+        <div class="flower__g-long">
+          <div class="flower__g-long__top"></div>
+          <div class="flower__g-long__bottom"></div>
+        </div>
+      </div>
+  
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--1">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+  
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--2">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.4s">
+        <div class="flower__g-right flower__g-right--1">
+          <div class="leaf"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.8s">
+        <div class="flower__g-right flower__g-right--2">
+          <div class="leaf"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.8s">
+        <div class="flower__g-front">
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__line"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:3.2s">
+        <div class="flower__g-fr">
+          <div class="leaf"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--1"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--2"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--3"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--4"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--5"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--6"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--7"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--8"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--0">
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:2.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--1">
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.8s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--2">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--3">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--4">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--5">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--6">
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.4s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.6s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.8s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--7">
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.5s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+
+      <!-- Elegant Gift Bouquet Wrap & Ribbon (3D Volumetric Wrap Cone) -->
+      <div class="bouquet-wrapper" id="bouquetWrapper">
+        <div class="bouquet-paper-back"></div>
+        <div class="bouquet-paper-left"></div>
+        <div class="bouquet-paper-right"></div>
+        <div class="bouquet-paper-front"></div>
+        <div class="bouquet-paper-overlay"></div>
+        <div class="bouquet-paper-back-outer"></div>
+        <div class="bouquet-ribbon bouquet-ribbon--front">
+          <div class="ribbon-loop-left"></div>
+          <div class="ribbon-loop-right"></div>
+          <div class="ribbon-center"></div>
+          <div class="ribbon-tail-left"></div>
+          <div class="ribbon-tail-right"></div>
+        </div>
+        <div class="bouquet-ribbon bouquet-ribbon--back">
+          <div class="ribbon-loop-left"></div>
+          <div class="ribbon-loop-right"></div>
+          <div class="ribbon-center"></div>
+          <div class="ribbon-tail-left"></div>
+          <div class="ribbon-tail-right"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Circular 3D Meadow Garden Island (Taman Rumput Melingkar Mengelilingi Bunga) -->
+    <div class="meadow-ground-disc"></div>
+    <div class="meadow-island" id="meadowIsland">
+      <!-- Ring 1: Lingkar Dalam Menempel Pangkal Buket (Radius ~11vmin) -->
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: 0vmin; --z: 12vmin; --s: 0.44; --r: 2deg; --d: 1.4s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: 9vmin; --z: 9vmin; --s: 0.40; --r: 8deg; --d: 1.7s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: 13vmin; --z: 1vmin; --s: 0.42; --r: -4deg; --d: 2.1s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: 9vmin; --z: -9vmin; --s: 0.40; --r: 6deg; --d: 1.9s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: 0vmin; --z: -13vmin; --s: 0.45; --r: -3deg; --d: 2.3s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: -9vmin; --z: -9vmin; --s: 0.38; --r: -8deg; --d: 1.6s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: -13vmin; --z: 0vmin; --s: 0.42; --r: 4deg; --d: 2.0s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: -9vmin; --z: 9vmin; --s: 0.40; --r: -6deg; --d: 1.8s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+
+      <!-- Ring 2: Lingkar Tengah Badan Taman (Radius ~20vmin) -->
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: 7vmin; --z: 19vmin; --s: 0.48; --r: 4deg; --d: 1.5s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: 17vmin; --z: 11vmin; --s: 0.44; --r: 10deg; --d: 2.2s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: 21vmin; --z: -1vmin; --s: 0.46; --r: -5deg; --d: 1.8s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: 13vmin; --z: -16vmin; --s: 0.44; --r: 6deg; --d: 2.4s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass grow-ans" style="--x: 5vmin; --z: -21vmin; --s: 0.48; --r: -2deg; --d: 2.0s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: -7vmin; --z: -20vmin; --s: 0.45; --r: 4deg; --d: 2.2s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: -17vmin; --z: -12vmin; --s: 0.44; --r: -8deg; --d: 1.7s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: -21vmin; --z: 1vmin; --s: 0.46; --r: 3deg; --d: 2.1s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass grow-ans" style="--x: -13vmin; --z: 16vmin; --s: 0.44; --r: -6deg; --d: 1.9s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: -5vmin; --z: 21vmin; --s: 0.48; --r: 2deg; --d: 2.3s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+
+      <!-- Ring 3: Lingkar Luar Tepi Taman (Radius ~29vmin) -->
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: 6vmin; --z: 29vmin; --s: 0.36; --r: 3deg; --d: 1.6s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: 21vmin; --z: 21vmin; --s: 0.38; --r: 11deg; --d: 2.4s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: 29vmin; --z: 5vmin; --s: 0.35; --r: -6deg; --d: 2.0s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: 22vmin; --z: -19vmin; --s: 0.38; --r: 8deg; --d: 1.7s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass grow-ans" style="--x: 12vmin; --z: -27vmin; --s: 0.35; --r: -4deg; --d: 2.2s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--moss grow-ans" style="--x: -5vmin; --z: -29vmin; --s: 0.36; --r: 2deg; --d: 1.9s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--emerald grow-ans" style="--x: -21vmin; --z: -20vmin; --s: 0.38; --r: -9deg; --d: 2.3s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--teal grow-ans" style="--x: -29vmin; --z: -3vmin; --s: 0.35; --r: 6deg; --d: 1.8s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass grow-ans" style="--x: -22vmin; --z: 19vmin; --s: 0.38; --r: -7deg; --d: 2.1s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+      <div class="mini-grass mini-grass--cyan grow-ans" style="--x: -12vmin; --z: 27vmin; --s: 0.36; --r: 4deg; --d: 2.5s;">
+        <div class="leaf leaf--0"></div><div class="leaf leaf--1"></div><div class="leaf leaf--2"></div><div class="leaf leaf--3"></div>
+      </div>
+    </div>
+  </div>
+  <!-- === [3D-INTERACTION-FEATURE-START] === -->
+  </div>
+  <!-- === [3D-INTERACTION-FEATURE-END] === -->
+
+
+
+  <script src="js/effects.js"></script>
+</body>
+</html>
